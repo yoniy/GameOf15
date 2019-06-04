@@ -45,6 +45,9 @@ public class GameBoard extends JPanel implements UIManagerIFC{
 	// Text Color + Tile outline Color
 	private Color TEXT_COLOR;
 	
+	// Foreground Font (Tiles)
+	private String FONT = "SansSerif";
+	
 	// Size of tile on UI
 	private int tileSize;
 	
@@ -75,7 +78,7 @@ public class GameBoard extends JPanel implements UIManagerIFC{
 	    setPreferredSize(new Dimension(dimension, dimension + margin));
 	    setBackground(BACKGROUND_COLOR);
 	    setForeground(FOREGROUND_COLOR);
-	    setFont(new Font("SansSerif", Font.BOLD, 60));
+	    setFont(new Font(FONT, Font.BOLD, 60));
 	}
 	
 	@Override
