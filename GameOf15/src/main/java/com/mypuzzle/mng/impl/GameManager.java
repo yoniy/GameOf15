@@ -22,8 +22,16 @@ public class GameManager implements GameManagerIFC {
 	// Indicating whether the game is over or not
 	private boolean gameOver;
 	
+	public GameManager(int size) {
+		initManager(size);
+	}
+	
 	public GameManager(GameSettings settings) {
 		int size = settings.getSize();
+		initManager(size);
+	}
+	
+	private void initManager(int size){
 		numOfTiles = (size * size) - 1; // -1 because we don't count the blank tile
 		tiles = new int[size * size];
 		RANDOM = new Random();
@@ -42,6 +50,11 @@ public class GameManager implements GameManagerIFC {
 	@Override
 	public int[] getTiles() {
 		return this.tiles;
+	}
+	
+	@Override
+	public void setTiles(int[] tiles) {
+		this.tiles = tiles;
 	}
 	
 	@Override

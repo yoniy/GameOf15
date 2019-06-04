@@ -23,6 +23,9 @@ public interface GameManagerIFC {
 	// Exposes an external getter for the 'blankPosition' property
 	public int getBlankPos();
 	
+	// Exposes an external setter for the 'tiles' property
+	public void setTiles(int[] tiles);
+	
 	// Exposes an external getter for our data model
 	public int[] getTiles();
 }
