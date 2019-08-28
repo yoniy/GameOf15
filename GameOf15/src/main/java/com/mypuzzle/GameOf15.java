@@ -8,6 +8,7 @@ import com.mypuzzle.mng.ifc.GameManagerIFC;
 import com.mypuzzle.mng.impl.GameManager;
 import com.mypuzzle.ui.ifc.UIManagerIFC;
 import com.mypuzzle.ui.impl.GameBoard;
+import com.mypuzzle.ui.impl.GameConsole;
 
 public class GameOf15 {
 	
@@ -27,11 +28,13 @@ public class GameOf15 {
     	
     	// Instantiate our Game Board
     	System.out.println("Initiating UI Board");
-    	UIManagerIFC board = new GameBoard(settings);
+//    	UIManagerIFC board = new GameBoard(settings);
+    	UIManagerIFC console = new GameConsole(settings);
     	
     	// Start the game
     	System.out.println("Starting the game...");
-    	board.initGameBoard(gameMng);
+//    	board.startGame(gameMng);
+    	console.startGame(gameMng);
 	}
     
     public GameSettings loadSettings(String fileName){

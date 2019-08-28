@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.mypuzzle.GameSettings;
+import com.mypuzzle.GameUtils;
 import com.mypuzzle.mng.ifc.GameManagerIFC;
 import com.mypuzzle.ui.ifc.UIManagerIFC;
 
@@ -82,7 +83,7 @@ public class GameBoard extends JPanel implements UIManagerIFC{
 	}
 	
 	@Override
-	public void initGameBoard(GameManagerIFC mng) {
+	public void startGame(GameManagerIFC mng) {
 		
 		this.gameMng = mng;
 		gameMng.setGameOver(true);
@@ -136,16 +137,16 @@ public class GameBoard extends JPanel implements UIManagerIFC{
 			// get tile position on the grid
 	        int c1 = ex / tileSize;
 	        int r1 = ey / tileSize;
-	        printCoordinates("User Click coordinates:", c1, r1);
+	        GameUtils.printCoordinates("User Click coordinates:", c1, r1);
 	        
 	        // get blank tile position on the grid (by converting a 1D into a 2D coordinates)
 	        int c2 = gameMng.getBlankPos() % gameSize;
 	        int r2 = gameMng.getBlankPos() / gameSize;
 	        
 	        // move tiles if needed, then check if solved
-	        int steps = calcSteps(r1, c1, r2, c2);
+	        int steps = GameUtils.calcSteps(r1, c1, r2, c2, gameSize);
 	        gameMng.moveTiles(steps);
-	        printMovement(steps);
+			GameUtils.printMovement(steps);
 		}
 		
 		updateBoard();
@@ -216,37 +217,5 @@ public class GameBoard extends JPanel implements UIManagerIFC{
 	    int asc = fm.getAscent();
 	    int desc = fm.getDescent();
 	    g.drawString(s,  x + (tileSize - fm.stringWidth(s)) / 2, y + (asc + (tileSize - (asc + desc)) / 2));
-	}
-
-	private int calcSteps(int clickedRow, int clickedCol, int blankRow, int blankCol){
-		
-		int steps = 0;
-		
-		// blank tile and Clicked tile are on the same row + are close neighbors (left/right) 
-        if(clickedRow == blankRow && Math.abs(clickedCol - blankCol) == 1){
-        	// move 1 step backward/forward
-        	steps = clickedCol > blankCol ? 1: -1;  
-        }
-        // blank tile and Clicked tile are on the same column + are close neighbors (up/down) 
-        else if(clickedCol == blankCol && Math.abs(clickedRow - blankRow) == 1){
-        	steps = clickedRow > blankRow ? gameSize: -gameSize;
-        }
-       
-        return steps;
-		
-	}
-	
-	private void printCoordinates(String prefix, int x, int y){
-		System.out.println(prefix + " " + "(" + x + "," + y + ")");
-	}
-	
-	private void printMovement(int steps){
-		if(steps != 0){
-			String direction = steps < 0 ? "back": "forward";
-			System.out.println("Moving the blank tile " + Math.abs(steps) + " steps " + direction + "\n");
-		}
-		else{
-			System.out.println("Nothing to move\n");
-		}
 	}
 }

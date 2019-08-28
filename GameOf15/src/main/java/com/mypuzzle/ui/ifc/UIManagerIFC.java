@@ -5,11 +5,11 @@ import com.mypuzzle.mng.ifc.GameManagerIFC;
 public interface UIManagerIFC {
 	
 	/**
-	 * Initiates a new Game Board size X size
+	 * Initiates a new Game Board size X size and starts a new game
 	 * Could be either by a simple terminal I/O or by a dedicated GUI
 	 * @param mng - a GameManager interface, containing the data Model
 	 */
-	public void initGameBoard(GameManagerIFC mng);
+	public void startGame(GameManagerIFC mng);
 	
 	/**
 	 * Handles User's interactions with the Board
